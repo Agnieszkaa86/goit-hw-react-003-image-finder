@@ -15,10 +15,11 @@ export class App extends Component {
     search: '',
     nextSearch: '',
     isLoading: false,
-    isModalOpen: false,
-    modalImg: null,
+    // isModalOpen: false,
+    // modalImg: null,
     error: null,
   };
+
 
   updatePictures = async newSearch => {
     const { page, pictures, search } = this.state;
@@ -69,16 +70,19 @@ export class App extends Component {
       this.updatePictures(search);
       this.setState({ nextSearch: search });
     }
-  }
-
+  };
+  modal = {
+    show: false,
+    img: null,
+   }
   openModalWindow = e => {
     const largeImg = e.target.dataset.source;
     if (e.target.nodeName !== 'IMG') {
       return;
     }
     this.setState({
-      modalImg: largeImg,
-      isModalOpen: true,
+     img: largeImg,
+     show : true,
     });
   };
 
@@ -86,14 +90,14 @@ export class App extends Component {
     if (e.target.nodeName === 'IMG') {
       return;
     }
-    this.setState({ isModalOpen: false });
+    this.setState({ show: false });
   };
   render() {
-    const { error, pictures, isLoading, isModalOpen, modalImg } = this.state;
-    if (isModalOpen) {
+    const { error, pictures, isLoading, show, img } = this.state;
+    if (show) {
       window.addEventListener('keydown', e => {
         if (e.code === 'Escape') {
-          this.setState({ isModalOpen: false });
+          this.setState({ show: false });
         }
       });
     }
@@ -115,8 +119,8 @@ export class App extends Component {
           <Button text="Load more" func={this.loadMorePictures} />
         }
 
-        {isModalOpen && (
-          <Modal modalImgLarge={modalImg} closeImg={this.closeModalWindow} />
+        {show && (
+          <Modal modalImgLarge={img} closeImg={this.closeModalWindow} />
         )}
       </Wrapper>
     );
