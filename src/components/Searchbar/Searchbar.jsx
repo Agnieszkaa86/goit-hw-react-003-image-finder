@@ -1,31 +1,30 @@
 import { Component } from 'react';
 import { ImSearch } from 'react-icons/im';
-import { Header, Form, SearchBtn, Input} from './Searchbar.styled';
+import { Header, Form, SearchBtn, Input } from './Searchbar.styled';
 import PropTypes from 'prop-types';
 
-
 export class Searchbar extends Component {
-  state = { 
-     searchPicture: '',
+  state = {
+    searchPicture: '',
   };
 
-  inputChange = (e) => {
+  inputChange = e => {
     this.setState({ searchPicture: e.target.value.toLowerCase() });
   };
 
-  valueSubmit = (e) => {
+  valueSubmit = e => {
     e.preventDefault();
     this.props.newSearch({ ...this.state });
-    this.setState({ searchPicture: '' });
+    this.setState({ searchPicture: e.target.searchPicture.value });
   };
-  
+
   render() {
     return (
       <>
         <Header>
           <Form onSubmit={this.valueSubmit}>
             <SearchBtn type="submit">
-            <ImSearch />
+              <ImSearch />
             </SearchBtn>
 
             <Input
