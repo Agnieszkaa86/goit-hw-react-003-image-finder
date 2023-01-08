@@ -9,6 +9,7 @@ import { Wrapper, ErrorMsg } from './Loader/Loader.styled';
 
 export class App extends Component {
   state = {
+    searchPicture: '',
     pictures: [],
     page: 1,
     search: '',
@@ -43,7 +44,7 @@ export class App extends Component {
     }
   };
 
-  resetArray = searchPicture => {
+  resetArray = (searchPicture) => {
     this.setState({
       search: searchPicture,
       isLoading: true,
@@ -102,24 +103,20 @@ export class App extends Component {
         {error && (
           <ErrorMsg>Whoops, something went wrong: {error.message}</ErrorMsg>
         )}
-        {isLoading ? (
-          <Loader />
-        ) : (
+       
+        {pictures.length > 0 && (
           <ImageGallery
             pictures={pictures}
             openModalWindow={this.openModalWindow}
           />
         )}
-        {pictures.length !== 0 ? (
+         {isLoading && <Loader />}
+        {pictures.length > 0 &&
           <Button text="Load more" func={this.loadMorePictures} />
-        ) : (
-          ''
-        )}
+        }
 
-        {isModalOpen ? (
+        {isModalOpen && (
           <Modal modalImgLarge={modalImg} closeImg={this.closeModalWindow} />
-        ) : (
-          <></>
         )}
       </Wrapper>
     );
