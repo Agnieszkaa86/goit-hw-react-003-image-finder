@@ -15,9 +15,11 @@ export class App extends Component {
     search: '',
     nextSearch: '',
     isLoading: false,
-    // isModalOpen: false,
-    // modalImg: null,
     error: null,
+     modal : {
+    show: false,
+    img: null,
+   }
   };
 
 
@@ -71,10 +73,7 @@ export class App extends Component {
       this.setState({ nextSearch: search });
     }
   };
-  modal = {
-    show: false,
-    img: null,
-   }
+ 
   openModalWindow = e => {
     const largeImg = e.target.dataset.source;
     if (e.target.nodeName !== 'IMG') {
@@ -94,13 +93,7 @@ export class App extends Component {
   };
   render() {
     const { error, pictures, isLoading, show, img } = this.state;
-    if (show) {
-      window.addEventListener('keydown', e => {
-        if (e.code === 'Escape') {
-          this.setState({ show: false });
-        }
-      });
-    }
+   
     return (
       <Wrapper>
         <Searchbar newSearch={this.changeSearchValue} />
