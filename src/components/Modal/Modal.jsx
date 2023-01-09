@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types';
 import { Overlay, ModalWindow } from './Modal.styled';
 
-export const Modal = ({ modalImgLarge, closeImg }) => {
+export const Modal = ({ modalImgLarge, show}) => {
+   if (show) {
+      window.addEventListener('keydown', e => {
+        if (e.code === 'Escape') {
+          this.setState({ show: false });
+        }
+      });
+    }
   return (
-    <Overlay onClick={closeImg}>
+    <Overlay onClick={show}>
       <ModalWindow>
         <img src={modalImgLarge} alt="" />
       </ModalWindow>
@@ -12,5 +19,5 @@ export const Modal = ({ modalImgLarge, closeImg }) => {
 };
 Modal.propTypes = {
   modalImgLarge: PropTypes.string.isRequired,
-  closeImg: PropTypes.func.isRequired,
+  show: PropTypes.func.isRequired,
 };
