@@ -7,7 +7,7 @@ export const ImageGallery = ({ pictures, openModalWindow }) => {
     <>
       {pictures.length > 0 ? (
         <GalleryList onClick={openModalWindow}>
-          {pictures.map(({ id, webformatURL, largeImageURL,tags }) => (
+          {pictures.map(({ id, webformatURL, largeImageURL, tags }) => (
             <ImageGalleryItem
               key={id}
               webformatURL={webformatURL}
@@ -30,6 +30,7 @@ ImageGallery.propTypes = {
       id: PropTypes.number.isRequired,
       largeImageURL: PropTypes.string.isRequired,
       webformatURL: PropTypes.string.isRequired,
+      alt: PropTypes.string,
     })
   ),
 };
