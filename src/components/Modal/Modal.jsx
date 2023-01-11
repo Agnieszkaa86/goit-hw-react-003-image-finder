@@ -1,23 +1,35 @@
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Overlay, ModalWindow } from './Modal.styled';
 
-export const Modal = ({ modalImgLarge, show}) => {
-   if (show) {
-      window.addEventListener('keydown', e => {
-        if (e.code === 'Escape') {
-          this.setState({ show: false });
-        }
-      });
+export default class Modal extends Component {
+    componentDidMount() {
+        window.addEventListener("keydown", this.handleKeyDown);
     }
-  return (
-    <Overlay onClick={show}>
+
+    componentWillUnmount() {
+        window.removeEventListener("keydown", this.handleKeyDown);
+    }
+
+    handleKeyDown = (e) => {
+        if (e.code === "Escape") {
+            return this.props.closeModalWindow();
+        }
+    };
+  render() {
+    const { item } = this.props;
+       return (
+    <Overlay onClick={this.handleKeyDown}>
       <ModalWindow>
-        <img src={modalImgLarge} alt="" />
+        <img src={item} alt="" />
       </ModalWindow>
     </Overlay>
   );
+     }
+  
 };
+
 Modal.propTypes = {
-  modalImgLarge: PropTypes.string.isRequired,
-  show: PropTypes.func.isRequired,
+  item: PropTypes.string,
+  closeModalWindow: PropTypes.func,
 };
