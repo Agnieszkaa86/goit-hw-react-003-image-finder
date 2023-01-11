@@ -37,7 +37,7 @@ export class App extends Component {
         if (search === newSearch) {
           this.setState({ pictures: newPictures, page: page + 1 });
         }
-        if (this.state.pictures.length < 12) {
+        if (pictures.length < 12) {
           this.setState({ isLoadMoreBtn: true });
         } else {
           this.setState({ isLoadMoreBtn: false });
