@@ -37,10 +37,9 @@ export class App extends Component {
         if (search === newSearch) {
           this.setState({ pictures: newPictures, page: page + 1 });
         }
-        if (pictures.length < 12) {
+        if (photos.length < 12) {
           this.setState({ isLoadMoreBtn: true });
-        } else {
-          this.setState({ isLoadMoreBtn: false });
+         
         }
       } else {
         alert('Sorry, no image matching');
@@ -52,7 +51,7 @@ export class App extends Component {
     }
   };
 
-  resetArray = searchPicture => {
+  resetArray = (searchPicture) => {
     this.setState({
       search: searchPicture,
       isLoading: true,
