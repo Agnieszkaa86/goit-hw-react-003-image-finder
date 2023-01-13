@@ -8,7 +8,6 @@ export class Searchbar extends Component {
     const search = e.target.searchPicture.value;
     e.preventDefault();
     this.props.newSearch(search);
-    this.setState({ search });
   };
 
   render() {
