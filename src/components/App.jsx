@@ -60,7 +60,7 @@ export class App extends Component {
     });
   };
 
-  changeSearchValue = ({ searchPicture }) => {
+  changeSearchValue = (searchPicture ) => {
     this.resetArray(searchPicture);
     this.updatePictures(searchPicture);
   };
